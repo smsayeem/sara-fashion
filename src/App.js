@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import HomePage from "./pages/homepage";
+import Shop from "./pages/shop";
+import Header from "./components/header";
+import SignInSignUp from "./pages/singInSignUp";
+import { auth, createUserProfileDocument } from "./utilities/firebase";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/actions/user-action";
 
-function App() {
+function App({ setCurrentUser }) {
+  // const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
+          });
+        });
+      }
+      setCurrentUser(userAuth);
+    });
+    return () => {
+      console.log("will unmount", unsubscribeFromAuth);
+      unsubscribeFromAuth();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={Shop} />
+        <Route path="/signin" component={SignInSignUp} />
+      </Switch>
     </div>
   );
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  };
+};
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
