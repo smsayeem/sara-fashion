@@ -7,7 +7,7 @@ import Header from "./components/header";
 import SignInSignUp from "./pages/singInSignUp";
 import { auth, createUserProfileDocument } from "./utilities/firebase";
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/actions/user-action";
+import { setCurrentUser } from "./redux/user/user-action";
 
 function App({ setCurrentUser, currentUser }) {
   // const [currentUser, setCurrentUser] = useState(null);

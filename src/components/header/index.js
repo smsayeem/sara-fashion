@@ -5,8 +5,10 @@ import logo from "../../assets/logo1.png";
 import { Link } from "react-router-dom";
 import { auth } from "../../utilities/firebase";
 import { connect } from "react-redux";
+import CartIcon from "../cart-icon";
+import CartDropdown from "../cart-dropdown";
 
-function Header({ currentUser }) {
+function Header({ currentUser, dropdownHidden }) {
   // console.log("Header currentUser=", currentUser);
   return (
     <div className="header">
@@ -29,13 +31,16 @@ function Header({ currentUser }) {
             Sign in
           </Link>
         )}
+        <CartIcon />
       </div>
+      {dropdownHidden ? null : <CartDropdown />}
     </div>
   );
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
   return {
-    currentUser: state.user.currentUser,
+    currentUser,
+    dropdownHidden: hidden,
   };
 };
 
