@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { auth, createUserProfileDocument } from "./utilities/firebase";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/user-action";
 import HomePage from "./pages/homepage";
 import Shop from "./pages/shop";
 import Header from "./components/header";
 import SignInSignUp from "./pages/singInSignUp";
-import { auth, createUserProfileDocument } from "./utilities/firebase";
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user-action";
 
 function App({ setCurrentUser, currentUser }) {
   // const [currentUser, setCurrentUser] = useState(null);

@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-cart.svg";
 import "./style.scss";
-import toggleCartHidden from "../../redux/cart/cart-action";
+import { toggleCartHidden } from "../../redux/cart/cart-action";
 import { connect } from "react-redux";
 
 function CartIcon({ toggleCartHidden }) {
