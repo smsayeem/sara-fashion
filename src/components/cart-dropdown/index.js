@@ -4,14 +4,29 @@ import CustomButton from "../customButton";
 import CartItem from "../cart-item";
 import { connect } from "react-redux";
 import { selectCartItems } from "../../redux/cart/cart.selector";
+import { withRouter } from "react-router-dom";
+import { toggleCartHidden } from "../../redux/cart/cart-action";
 
-function CartDropdown({ cartItems }) {
+function CartDropdown(props) {
+  const { cartItems, history, dispatch } = props;
+  console.log("dropdown props=", props);
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
-        {cartItems.length > 0 &&
-          cartItems.map((item) => <CartItem key={item.id} item={item} />)}
-        <CustomButton>Go to checkout</CustomButton>
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} item={item} />)
+        ) : (
+          <span className="empty-message">Your cart is empty</span>
+        )}
+
+        <CustomButton
+          onClick={() => {
+            history.push("/checkout");
+            dispatch(toggleCartHidden());
+          }}
+        >
+          Go to checkout
+        </CustomButton>
       </div>
     </div>
   );
@@ -27,4 +42,14 @@ const mapStateToProps = (state) => {
     cartItems: selectCartItems(state),
   };
 };
-export default connect(mapStateToProps)(CartDropdown);
+
+// note: 'connect' also provide dispatch so that without the below function, we can directly dispatch our action
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     toggleCartHidden: () => dispatch(toggleCartHidden()),
+//   };
+// };
+export default withRouter(
+  connect(mapStateToProps)(CartDropdown)
+  // connect(mapStateToProps, mapDispatchToProps)(CartDropdown)
+);

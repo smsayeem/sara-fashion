@@ -10,6 +10,7 @@ import HomePage from "./pages/homepage";
 import Shop from "./pages/shop";
 import Header from "./components/header";
 import SignInSignUp from "./pages/singInSignUp";
+import CheckoutPage from "./pages/checkout";
 
 function App({ setCurrentUser, currentUser }) {
   // const [currentUser, setCurrentUser] = useState(null);
@@ -44,6 +45,7 @@ function App({ setCurrentUser, currentUser }) {
           path="/signin"
           render={() => (currentUser ? <Redirect to="/" /> : <SignInSignUp />)}
         />
+        <Route exact path="/checkout" component={CheckoutPage} />
       </Switch>
     </div>
   );
