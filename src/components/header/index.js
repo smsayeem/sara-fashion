@@ -7,6 +7,9 @@ import { auth } from "../../utilities/firebase";
 import { connect } from "react-redux";
 import CartIcon from "../cart-icon";
 import CartDropdown from "../cart-dropdown";
+import { selectDropdownHidden } from "../../redux/cart/cart.selector";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 function Header({ currentUser, dropdownHidden }) {
   // console.log("Header currentUser=", currentUser);
@@ -37,11 +40,22 @@ function Header({ currentUser, dropdownHidden }) {
     </div>
   );
 }
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
-  return {
-    currentUser,
-    dropdownHidden: hidden,
-  };
-};
+// const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
+//   return {
+//     currentUser,
+//     dropdownHidden: hidden,
+//   };
+// };
+// const mapStateToProps = (state) => {
+//   return {
+//     currentUser: selectCurrentUser(state),
+//     dropdownHidden: selectDropdownHidden(state),
+//   };
+// };
+// another way-- createStructuredSelector will pass our top level state automatically into each selectos
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  dropdownHidden: selectDropdownHidden,
+});
 
 export default connect(mapStateToProps)(Header);
