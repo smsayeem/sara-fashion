@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import FormInput from "../form-input";
 import CustomButton from "../customButton";
-import { auth, createUserProfileDocument } from "../../utilities/firebase";
+import { auth, createUserProfileDocument } from "../../firebase";
 
 function Signup() {
   const [displayName, setDisplayName] = useState("");

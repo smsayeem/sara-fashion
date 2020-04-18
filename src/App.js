@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./utilities/firebase";
+import { auth, createUserProfileDocument } from "./firebase";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-action";
 import { selectCurrentUser } from "./redux/user/user.selector";

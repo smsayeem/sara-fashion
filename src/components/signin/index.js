@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormInput from "../form-input";
 import CustomButton from "../customButton";
 import "./style.scss";
-import { auth, signInWithGoogle } from "../../utilities/firebase";
+import { auth, signInWithGoogle } from "../../firebase";
 
 function Signin() {
   const [email, setEmail] = useState("");
