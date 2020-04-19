@@ -12,10 +12,9 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 
 function Header({ currentUser, dropdownHidden }) {
-  // console.log("Header currentUser=", currentUser);
   return (
     <div className="header">
-      <Link className="logo-container">
+      <Link className="logo-container" to="/">
         <img src={logo} alt="logo" />
       </Link>
       <div className="options">
@@ -52,7 +51,7 @@ function Header({ currentUser, dropdownHidden }) {
 //     dropdownHidden: selectDropdownHidden(state),
 //   };
 // };
-// another way-- createStructuredSelector will pass our top level state automatically into each selectos
+// another way: using selector-- createStructuredSelector will pass our top level state automatically into each selectos
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   dropdownHidden: selectDropdownHidden,

@@ -1,49 +1,24 @@
 import React, { useState } from "react";
+import {connect} from 'react-redux';
+
 import MenuItem from "../menu-item";
 import "./style.scss";
 
-function Directory() {
-  const [sections, setSections] = useState([
-    {
-      title: "hats",
-      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-      id: 1,
-    },
-    {
-      title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-      id: 2,
-    },
-    {
-      title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-      id: 3,
-    },
-    {
-      title: "womens",
-      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-      size: "large",
-      id: 4,
-    },
-    {
-      title: "mens",
-      imageUrl: "https://i.ibb.co/R70vBrQ/mens.png",
-      size: "large",
-      id: 5,
-    },
-  ]);
+function Directory({sections}) {
   return (
     <div className="directory-menu">
-      {sections.map(({ title, imageUrl, id, size }) => (
+      {sections.map(({id, ...otherSectionsProps}) => (
         <MenuItem
           key={id}
-          title={title}
-          subtitle="shop now"
-          imageUrl={imageUrl}
-          size={size}
+          {...otherSectionsProps}
         />
       ))}
     </div>
   );
 }
-export default Directory;
+const mapStateToProps=({directory}) =>{
+  return{
+    sections: directory.sections
+  }
+}
+export default connect(mapStateToProps)(Directory);
