@@ -9,7 +9,6 @@ import { toggleCartHidden } from "../../redux/cart/cart-action";
 
 function CartDropdown(props) {
   const { cartItems, history, dispatch } = props;
-  console.log("dropdown props=", props);
   return (
     <div className="cart-dropdown">
       <div className="cart-items">

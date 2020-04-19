@@ -4,7 +4,6 @@ import "./style.scss";
 
 function MenuItem(props) {
   const { title, imageUrl, size, subtitle, history, linkUrl, match } = props;
-  console.log('MenuItem props=', props);
   return (
     <div className={`${size} menu-item`} onClick={()=>history.push(`${match.url}${linkUrl}`)}>
       <div

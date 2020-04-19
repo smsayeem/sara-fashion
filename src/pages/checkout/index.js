@@ -1,12 +1,16 @@
 import React from "react";
-import "./style.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
   selectCartItems,
   selectCartTotal,
 } from "../../redux/cart/cart.selector";
+
 import CheckoutItem from "../../components/checkout-item";
+
+import "./style.scss";
+import StripeCheckoutButton from '../../components/stripe-button';
+
 
 function CheckoutPage({ cartItems, total, toggleCartHidden }) {
   return (
@@ -34,6 +38,7 @@ function CheckoutPage({ cartItems, total, toggleCartHidden }) {
       <div className="total">
         <span>TOTAL: ${total}</span>
       </div>
+      <StripeCheckoutButton price={total} />
     </div>
   );
 }

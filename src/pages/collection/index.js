@@ -7,7 +7,6 @@ import CollectionItem from '../../components/collection-item'
 import './style.scss'
 
 function CollectionPage(props){
-    console.log('collection props', props);
     const { match, collections } = props;
         return(
             <div className='collection-page'>
